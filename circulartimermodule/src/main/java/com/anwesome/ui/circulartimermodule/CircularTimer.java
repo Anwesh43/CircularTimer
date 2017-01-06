@@ -74,8 +74,8 @@ public class CircularTimer {
             if(h>w) {
                 k = h/4;
             }
-            view.setX(w/2);
-            view.setY(h/2);
+            view.setX(w/3);
+            view.setY(h/3);
             activity.addContentView(view,new ViewGroup.LayoutParams(k,k));
             added= true;
         }
