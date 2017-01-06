@@ -11,6 +11,7 @@ import android.graphics.PointF;
 import android.hardware.display.DisplayManager;
 import android.util.AttributeSet;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -65,6 +66,7 @@ public class CircularTimer {
     }
 
     public void start() {
+        start = 0;
         view.setStartAnimating(true);
         view.initPoints();
         if(!added) {
@@ -128,7 +130,6 @@ public class CircularTimer {
                 }
                 if(start > time) {
                     startAnimating = false;
-                    start = 0;
                     if(timerListener != null) {
                         timerListener.onStop();
                     }
@@ -141,8 +142,33 @@ public class CircularTimer {
                 }
             }
         }
+        public boolean onTouchEvent(MotionEvent event) {
+            if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                toggle();
+            }
+            return true;
+        }
+        private void toggle() {
+            if(startAnimating) {
+                stop();
+            }
+            else {
+                resume();
+            }
+        }
         public void setStartAnimating(boolean startAnimating) {
             this.startAnimating = startAnimating;
+        }
+        public void stop() {
+            startAnimating = false;
+        }
+        public void resume() {
+            if(start == time) {
+                initPoints();
+                start = 0;
+            }
+            startAnimating = true;
+            postInvalidate();
         }
     }
 }
