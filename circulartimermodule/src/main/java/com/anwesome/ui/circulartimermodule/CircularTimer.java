@@ -168,6 +168,9 @@ public class CircularTimer {
         }
         public void stop() {
             startAnimating = false;
+            if(timerListener!=null) {
+                timerListener.onStop();
+            }
         }
         public void resume() {
             if(start == time) {
@@ -175,6 +178,9 @@ public class CircularTimer {
                 start = 0;
             }
             startAnimating = true;
+            if(timerListener!=null) {
+                timerListener.onStart();
+            }
             postInvalidate();
         }
     }
