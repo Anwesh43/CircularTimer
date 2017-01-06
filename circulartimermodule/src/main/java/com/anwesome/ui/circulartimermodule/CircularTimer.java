@@ -127,6 +127,7 @@ public class CircularTimer {
 
             if(startAnimating) {
                 float deg = 360*(start*1.0f)/time;
+                deg -= 90;
                 float radius = (2*canvas.getWidth())/5;
                 float x = canvas.getWidth()/2+(float)(radius*Math.cos(deg*Math.PI/180)), y = canvas.getHeight()/2+(float)(radius*Math.sin(deg*Math.PI/180));
                 points.add(new PointF(x,y));
