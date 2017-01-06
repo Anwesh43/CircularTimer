@@ -70,7 +70,13 @@ public class CircularTimer {
         view.setStartAnimating(true);
         view.initPoints();
         if(!added) {
-            activity.addContentView(view,new ViewGroup.LayoutParams(w/4,w/4));
+            int k = w/4;
+            if(h>w) {
+                k = h/4;
+            }
+            view.setX(w/2);
+            view.setY(h/2);
+            activity.addContentView(view,new ViewGroup.LayoutParams(k,k));
             added= true;
         }
         else if(view.getVisibility() == View.INVISIBLE) {
